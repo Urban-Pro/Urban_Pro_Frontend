@@ -65,7 +65,7 @@ const Registrar = () => {
   return (
     <>
         <h1 className="text-sky-600 font-black text-6xl capitalize">Crea tu Cuenta y Administra tus {''}
-            <span className="text-slate-700">proyectos</span>
+            <span className="text-slate-700">tareas</span>
         </h1>
 
         { msg && <Alerta alerta={alerta} /> }

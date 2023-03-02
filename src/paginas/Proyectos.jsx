@@ -9,7 +9,7 @@ const Proyectos = () => {
 
   return (
     <>
-        <h1 className="text-4xl font-black">Proyectos</h1>
+        <h1 className="text-4xl font-black">Modelos</h1>
 
         {msg && <Alerta alerta={alerta} />}
 
@@ -21,7 +21,7 @@ const Proyectos = () => {
                       proyecto={proyecto}
                   />
               ))
-            : <p className=" text-center text-gray-600 uppercase  p-5">No hay proyectos aún</p>}
+            : <p className=" text-center text-gray-600 uppercase  p-5">No hay Modelos aún</p>}
         </div>
     </>
   )
