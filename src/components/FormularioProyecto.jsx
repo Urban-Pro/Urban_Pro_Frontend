@@ -120,7 +120,7 @@ const FormularioProyecto = () => {
                     <input
                         type="submit"
                         value={id ? 'Actualizar Proyecto': 'Crear Proyecto'}
-                        className='bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors'
+                        className='bg-pink-200 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors'
                     />
             </form>
     )

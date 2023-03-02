@@ -27,15 +27,15 @@ const Header = () => {
                     type="button"
                     className='font-bold uppercase'
                     onClick={handleBuscador}
-                >Buscar Proyecto</button>
+                >Buscar Modelo</button>
                 <Link
                     to="/proyectos"
                     className='font-bold uppercase'
-                >Proyectos</Link>
+                >Modelos</Link>
 
                 <button
                     type="button"
-                    className='text-white text-sm bg-sky-600 p-3 rounded-md uppercase font-bold'
+                    className='text-white text-sm bg-pink-200 p-3 rounded-md uppercase font-bold'
                     onClick={handleCerrarSesion}
                 >Cerrar Sesión</button>
 

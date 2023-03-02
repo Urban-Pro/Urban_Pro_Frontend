@@ -55,7 +55,7 @@ const Busqueda = () => {
                                 <Combobox.Option
                                     key={proyecto._id}
                                     value={proyecto}
-                                    className={({active}) => classNames('cursor-default select-none px-4 py-2', active && 'bg-sky-600 text-white') }
+                                    className={({active}) => classNames('cursor-default select-none px-4 py-2', active && 'bg-pink-200 text-white') }
                                 >
                                     {proyecto.nombre}
                                 </Combobox.Option>

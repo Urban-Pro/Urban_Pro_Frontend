@@ -193,7 +193,7 @@ const ModalFormularioTarea = () => {
 
                                         <input
                                             type="submit"
-                                            className='bg-sky-600 hover:bg-sky-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded text-sm'
+                                            className='bg-pink-200 hover:bg-sky-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded text-sm'
                                             value={ id ? 'Guardar Cambios': 'Crear Tarea'}
                                         />
 
