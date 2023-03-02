@@ -85,7 +85,7 @@ const ProyectosProvider = ({children}) => {
             setProyectos(proyectosActualizados)
 
             setAlerta({
-                msg: 'Proyecto Actualizado Correctamente',
+                msg: 'Modelo Actualizada Correctamente',
                 error: false
             })
 
@@ -115,7 +115,7 @@ const ProyectosProvider = ({children}) => {
             setProyectos([...proyectos, data])
 
             setAlerta({
-                msg: 'Proyecto Creado Correctamente',
+                msg: 'Modelo Creada Correctamente',
                 error: false
             })
 
