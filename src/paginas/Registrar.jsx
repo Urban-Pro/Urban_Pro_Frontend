@@ -64,8 +64,8 @@ const Registrar = () => {
 
   return (
     <>
-        <h1 className="text-sky-600 font-black text-6xl capitalize">Crea tu Cuenta y Administra tus {''}
-            <span className="text-slate-700">tareas</span>
+        <h1 className="text-slate-700 font-black text-6xl capitalize">Crea tu Cuenta y Administra tus {''}
+            <span className="text-pink-300">tareas</span>
         </h1>
 
         { msg && <Alerta alerta={alerta} /> }
@@ -136,7 +136,7 @@ const Registrar = () => {
             <input 
                 type="submit"
                 value="Crear Cuenta"
-                className="bg-sky-700 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
+                className="bg-pink-300 mb-5 w-full py-3 text-black uppercase font-bold rounded hover:cursor-pointer hover:bg-pink-300 transition-colors"
             />
             
         </form>
