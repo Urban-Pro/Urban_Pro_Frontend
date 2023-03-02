@@ -80,7 +80,7 @@ const FormularioProyecto = () => {
                         <textarea
                             id="descripcion"
                             className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                            placeholder="Descripción del Proyecto"
+                            placeholder="Descripción de la Modelo"
                             value={descripcion}
                             onChange={e => setDescripcion(e.target.value)}
                         />
