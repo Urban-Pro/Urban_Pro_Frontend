@@ -59,7 +59,7 @@ const Header = () => {
                 email == "urbanproapp@outlook.com" ?
                 <Busqueda />
                 :
-                Null
+                null
                 }
             </div>
         </div>
