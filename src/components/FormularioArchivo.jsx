@@ -3,6 +3,7 @@ import clienteAxios from '../config/clienteAxios'
 
 const FormularioArchivo = () => {
   const [archivo, setArchivo] = useState(null);
+  const [percentCounter, setpercentCounter] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +14,7 @@ const FormularioArchivo = () => {
       await clienteAxios.post("/upload", formData, {
         onUploadProgress: (progressEvent) => {
           const percent = (progressEvent.loaded / progressEvent.total) * 100;
-          console.log(`Progress: ${Math.round(percent)}%`);
+          setpercentCounter(`Progress: ${Math.round(percent)}%`)
         },
       });
       alert("Archivo cargado correctamente");
@@ -29,6 +30,7 @@ const FormularioArchivo = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div><percentCounter/></div>
       <div className="mb-3">
         <label htmlFor="archivo" className="form-label">
           Seleccione un archivo:
