@@ -6,7 +6,8 @@ import Busqueda from './Busqueda'
 const Header = () => {
 
     const { handleBuscador, cerrarSesionProyectos } = useProyectos()
-    const { cerrarSesionAuth } = useAuth()
+    const { cerrarSesionAuth, auth } = useAuth()
+    const { email } = auth
 
     const handleCerrarSesion = () => {
         cerrarSesionAuth()
@@ -23,15 +24,30 @@ const Header = () => {
             </h2>
 
             <div className='flex flex-col md:flex-row items-center gap-4'>
+                {
+                email == "urbanproapp@outlook.com" ?
                 <button
-                    type="button"
-                    className='font-bold uppercase'
-                    onClick={handleBuscador}
+                type="button"
+                className='font-bold uppercase'
+                onClick={handleBuscador}
                 >Buscar Modelo</button>
+                :
+                null
+                }
+                
+                
+                {
+                email == "urbanproapp@outlook.com" ?
                 <Link
                     to="/proyectos"
                     className='font-bold uppercase'
                 >Modelos</Link>
+                :
+                <Link
+                    to="/proyectos"
+                    className='font-bold uppercase'
+                >Proyectos</Link>
+                }
 
                 <button
                     type="button"
@@ -39,7 +55,12 @@ const Header = () => {
                     onClick={handleCerrarSesion}
                 >Cerrar Sesión</button>
 
+                {
+                email == "urbanproapp@outlook.com" ?
                 <Busqueda />
+                :
+                Null
+                }
             </div>
         </div>
     </header>
