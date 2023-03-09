@@ -31,7 +31,7 @@ const Header = () => {
                 <Link
                     to="/proyectos"
                     className='font-bold uppercase'
-                >Modelos</Link>
+                >Modelosx</Link>
 
                 <button
                     type="button"
