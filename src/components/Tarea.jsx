@@ -26,7 +26,7 @@ const Tarea = ({tarea}) => {
           if (diasRestantes <= 0) {
             setDiasRestantes('Vencida');
           } else {
-            setDiasRestantes(`${diasRestantes} días`);
+            setDiasRestantes(`${diasRestantes} días ${horasRestantes}h ${minutosRestantes}m ${segundosRestantes}s`);
           }
       
           setTimer(`${horasRestantes}h ${minutosRestantes}m ${segundosRestantes}s`);
