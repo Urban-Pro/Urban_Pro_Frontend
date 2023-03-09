@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { formatearFecha } from "../helpers/formatearFecha"
 import useProyectos from "../hooks/useProyectos"
 import useAdmin from "../hooks/useAdmin"
@@ -8,6 +9,33 @@ const Tarea = ({tarea}) => {
     const admin = useAdmin()
 
     const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea
+    
+    const [timer, setTimer] = useState(null);
+    const [diasRestantes, setDiasRestantes] = useState('');
+
+    useEffect(() => {
+        const fechaLimite = new Date(fechaEntrega).getTime();
+        console.log(fechaLimite, fechaLimite)
+    
+        const intervalId = setInterval(() => {
+          const tiempoRestante = fechaLimite - new Date().getTime();
+          const diasRestantes = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+    
+          if (diasRestantes <= 0) {
+            setDiasRestantes('Vencida');
+          } else if (diasRestantes === 1) {
+            setDiasRestantes('1 día restante');
+          } else {
+            setDiasRestantes(`${diasRestantes} días restantes`);
+          }
+        }, 1000);
+    
+        setTimer(intervalId);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [fechaEntrega]);
 
     return (
         <div className="border-b p-5 flex justify-between items-center">
@@ -16,6 +44,7 @@ const Tarea = ({tarea}) => {
                 <p className="mb-1 text-sm text-gray-500 uppercase">{descripcion}</p>
                 <p className="mb-1 text-sm">{ formatearFecha(fechaEntrega) }</p>
                 <p className="mb-1 text-gray-600">Prioridad: {prioridad}</p>
+                <p className="mb-1 text-gray-600">{diasRestantes}</p>       
                 { estado && <p className="text-xs bg-green-600 uppercase p-1 rounded-lg text-white">Completada por: {tarea.completado.nombre}</p>}
             </div>
 
