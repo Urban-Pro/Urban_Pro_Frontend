@@ -2,19 +2,22 @@ import React, { useState } from "react";
 import clienteAxios from '../config/clienteAxios'
 
 const FormularioArchivo = () => {
-  const [archivo, setArchivo] = useState(null);
+  const [archivos, setArchivo] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("archivo", archivo);
+    for (let i = 0; i < archivos.length; i++) {
+      formData.append("archivos", archivos[i]);
+    }
     try {
       await clienteAxios.post("/upload", formData);
-      alert("Archivo cargado correctamente");
+      alert("Archivos cargados correctamente");
     } catch (error) {
-      alert("Error al cargar el archivo");
+      alert("Error al cargar los archivos");
     }
   };
+  
 
   const handleFileChange = (e) => {
     setArchivo(e.target.files[0]);
@@ -23,18 +26,19 @@ const FormularioArchivo = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label htmlFor="archivo" className="form-label">
-          Seleccione un archivo:
+        <label htmlFor="archivos" className="form-label">
+          Seleccione los archivos:
         </label>
         <input
-          type="file"
-          className="form-control"
-          id="archivo"
-          onChange={handleFileChange}
+        type="file"
+        className="form-control"
+        id="archivos"
+        onChange={handleFileChange}
+        multiple
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Cargar archivo
+        Cargar archivos
       </button>
     </form>
   );
