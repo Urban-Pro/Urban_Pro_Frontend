@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { formatearFecha } from "../helpers/formatearFecha"
 import useProyectos from "../hooks/useProyectos"
 import useAdmin from "../hooks/useAdmin"
-import FormularioArchivo from './formularioArchivo';
+import FormularioArchivo from '../components/FormularioArchivo';
 
 const Tarea = ({tarea}) => {
 
