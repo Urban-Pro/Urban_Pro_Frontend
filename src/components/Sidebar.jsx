@@ -5,7 +5,6 @@ const Sidebar = () => {
 
   const { auth } = useAuth()
   const { email } = auth
-  console.log(auth, "test")
 
   return (
     email == 'urbanproapp@outlook.com' || email == 'santiagomuzik@gmail.com' ?
