@@ -15,27 +15,30 @@ const Tarea = ({tarea}) => {
 
     useEffect(() => {
         const fechaLimite = new Date(fechaEntrega).getTime();
-        console.log(fechaLimite, fechaLimite)
-    
+      
         const intervalId = setInterval(() => {
           const tiempoRestante = fechaLimite - new Date().getTime();
           const diasRestantes = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
-    
+          const horasRestantes = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutosRestantes = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+          const segundosRestantes = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
+      
           if (diasRestantes <= 0) {
             setDiasRestantes('Vencida');
-          } else if (diasRestantes === 1) {
-            setDiasRestantes('1 día restante');
           } else {
-            setDiasRestantes(`${diasRestantes} días restantes`);
+            setDiasRestantes(`${diasRestantes} días`);
           }
+      
+          setTimer(`${horasRestantes}h ${minutosRestantes}m ${segundosRestantes}s`);
         }, 1000);
-    
+      
         setTimer(intervalId);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [fechaEntrega]);
+      
+        return () => {
+          clearInterval(timer);
+        };
+      }, [fechaEntrega]);
+      
 
     return (
         <div className="border-b p-5 flex justify-between items-center">
