@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { formatearFecha } from "../helpers/formatearFecha"
 import useProyectos from "../hooks/useProyectos"
 import useAdmin from "../hooks/useAdmin"
+import FormularioArchivo from './formularioArchivo';
 
 const Tarea = ({tarea}) => {
 
@@ -59,6 +60,8 @@ const Tarea = ({tarea}) => {
                     >Editar</button>
 
                 )}
+
+                <FormularioArchivo/>
 
                 <button
                     className={`${estado ? 'bg-pink-200' : 'bg-gray-600'} px-4 py-3 text-white uppercase font-bold text-sm rounded-lg`}
