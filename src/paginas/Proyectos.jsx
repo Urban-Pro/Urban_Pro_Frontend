@@ -12,7 +12,7 @@ const Proyectos = () => {
 
   return (
     <>
-        {email == "urbanproapp@outlook.com" ?
+        {email == 'urbanproapp@outlook.com' || email == 'santiagomuzik@gmail.com' ?
         <h1 className="text-4xl font-black">Modelos</h1> : <h1 className="text-4xl font-black">Proyectos en Curso</h1>}
         {msg && <Alerta alerta={alerta} />}
 

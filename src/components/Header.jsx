@@ -25,7 +25,7 @@ const Header = () => {
 
             <div className='flex flex-col md:flex-row items-center gap-4'>
                 {
-                email == "urbanproapp@outlook.com" ?
+                email == 'urbanproapp@outlook.com' || email == 'santiagomuzik@gmail.com'  ?
                 <button
                 type="button"
                 className='font-bold uppercase'
@@ -37,7 +37,7 @@ const Header = () => {
                 
                 
                 {
-                email == "urbanproapp@outlook.com" ?
+                email == 'urbanproapp@outlook.com' || email == 'santiagomuzik@gmail.com' ?
                 <Link
                     to="/proyectos"
                     className='font-bold uppercase'
@@ -56,7 +56,7 @@ const Header = () => {
                 >Cerrar Sesión</button>
 
                 {
-                email == "urbanproapp@outlook.com" ?
+                email == 'urbanproapp@outlook.com' || email == 'santiagomuzik@gmail.com' ?
                 <Busqueda />
                 :
                 null
