@@ -8,10 +8,17 @@ const FormularioArchivo = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("archivo", archivo);
+
     try {
-      await clienteAxios.post("/upload", formData);
+      await clienteAxios.post("/upload", formData, {
+        onUploadProgress: (progressEvent) => {
+          const percent = (progressEvent.loaded / progressEvent.total) * 100;
+          console.log(`Progress: ${Math.round(percent)}%`);
+        },
+      });
       alert("Archivo cargado correctamente");
     } catch (error) {
+      console.log("Error uploading file", error);
       alert("Error al cargar el archivo");
     }
   };
