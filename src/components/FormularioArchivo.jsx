@@ -30,7 +30,7 @@ const FormularioArchivo = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div><percentCounter/></div>
+      <div>{percentCounter}</div>
       <div className="mb-3">
         <label htmlFor="archivo" className="form-label">
           Seleccione un archivo:
