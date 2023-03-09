@@ -6,19 +6,19 @@ const FormularioArchivo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     formData.append("archivo", archivo);
-
+  
     const xhr = new XMLHttpRequest();
-
+  
     xhr.upload.addEventListener("progress", (event) => {
       if (event.lengthComputable) {
         const porcentaje = (event.loaded / event.total) * 100;
         setProgreso(porcentaje.toFixed(0));
       }
     });
-
+  
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -28,10 +28,10 @@ const FormularioArchivo = () => {
         }
       }
     };
-
+  
     xhr.open("POST", "/upload");
     xhr.send(formData);
-  };
+  };  
 
   const handleFileChange = (e) => {
     setArchivo(e.target.files[0]);
