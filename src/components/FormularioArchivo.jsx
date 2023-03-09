@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import clienteAxios from "../config/axios";
 
 const FormularioArchivo = () => {
   const [archivo, setArchivo] = useState(null);
@@ -8,9 +8,8 @@ const FormularioArchivo = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("archivo", archivo);
-    console.log(archivo)
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/upload`, formData);
+      await clienteAxios.post("/api/upload", formData);
       alert("Archivo cargado correctamente");
     } catch (error) {
       alert("Error al cargar el archivo");
