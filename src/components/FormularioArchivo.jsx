@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import clienteAxios from '../config/clienteAxios'
+import useAuth from '../hooks/useAuth'
 
 const FormularioArchivo = () => {
+  const { auth } = useAuth()
+  const { telegram } = auth
   const [archivo, setArchivo] = useState(null);
   const [percentCounter, setpercentCounter] = useState(0);
 
@@ -9,6 +12,8 @@ const FormularioArchivo = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("archivo", archivo);
+    formData.append("nombre", telegram);
+    console.log(formData)
 
     try {
       await clienteAxios.post("/upload/file", formData, {
