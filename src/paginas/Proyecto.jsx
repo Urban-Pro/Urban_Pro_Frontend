@@ -117,7 +117,7 @@ const Proyecto = () => {
                     >Añadir +</Link>
                 </div>
 
-                <div className='justify-center flex'>
+                <div className='justify-center flex flex-col'>
                   <div className='bg-white shadow mt-10 rounded-lg  justify-center w-fit'>
                       {proyecto.colaboradores?.length ? 
                         proyecto.colaboradores?.map( colaborador => (
