@@ -10,6 +10,7 @@ import NuevoPassword from './paginas/NuevoPassword'
 import ConfirmarCuenta from './paginas/ConfirmarCuenta'
 import Proyectos from './paginas/Proyectos'
 import NuevoProyecto from './paginas/NuevoProyecto'
+import EditarModelos from './paginas/EditarModelos'
 import Proyecto from './paginas/Proyecto'
 import EditarProyecto from './paginas/EditarProyecto'
 import NuevoColaborador from './paginas/NuevoColaborador'
@@ -38,6 +39,7 @@ function App() {
               <Route path="/proyectos" element={<RutaProtegida />}>
                   <Route index element={<Proyectos />} />
                   <Route path="crear-proyecto" element={<NuevoProyecto />} />
+                  <Route path="editar-modelos" element={<EditarModelos />} />
                   <Route path="nuevo-colaborador/:id" element={<NuevoColaborador />} />
                   <Route path=":id" element={<Proyecto />} />
                   <Route path="editar/:id" element={<EditarProyecto />} />
