@@ -9,7 +9,6 @@ let socket;
 const ModelosContext = createContext();
 
 const ModelosProvider = ({children}) => {
-    console.log("ModelosP")
 
     const [modelos, setModelos] = useState([]);
     const [alerta, setAlerta] = useState({});
