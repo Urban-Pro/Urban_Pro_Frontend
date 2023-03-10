@@ -117,15 +117,17 @@ const Proyecto = () => {
                     >Añadir</Link>
                 </div>
 
-                <div className='bg-white shadow mt-10 rounded-lg'>
-                    {proyecto.colaboradores?.length ? 
-                      proyecto.colaboradores?.map( colaborador => (
-                          <Colaborador 
-                              key={colaborador._id}
-                              colaborador={colaborador}
-                          />
-                      )) : 
-                    <p className='text-center my-5 p-10'>No hay Colaboradores en este proyecto</p>}
+                <div className='justify-center flex'>
+                  <div className='bg-white shadow mt-10 rounded-lg  justify-center w-fit'>
+                      {proyecto.colaboradores?.length ? 
+                        proyecto.colaboradores?.map( colaborador => (
+                            <Colaborador 
+                                key={colaborador._id}
+                                colaborador={colaborador}
+                            />
+                        )) : 
+                      <p className='text-center my-5 p-10'>No hay Colaboradores en este proyecto</p>}
+                  </div>
                 </div>
               </>
             )}
