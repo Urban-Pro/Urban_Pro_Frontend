@@ -110,10 +110,10 @@ const Proyecto = () => {
             {admin && (
               <>
                 <div className='flex items-center justify-center mt-10'>
-                    <p className='font-bold text-xl'>Colaboradores</p>
+                    <p className='font-bold text-xl w-1/2'>Colaboradores</p>
                     <Link
                       to={`/proyectos/nuevo-colaborador/${proyecto._id}`}
-                      className='text-gray-400 hover:text-black uppercase font-bold'
+                      className='text-gray-400 w-1/2 hover:text-black uppercase font-bold'
                     >Añadir</Link>
                 </div>
 
