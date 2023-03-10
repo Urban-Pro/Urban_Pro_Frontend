@@ -5,11 +5,12 @@ import clienteAxios from '../config/clienteAxios'
 
 const Registrar = () => {
     const [ nombre, setNombre ] = useState('')
-    const [ telegram, setTelegram ] = useState('telegram')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ repetirPassword, setRepetirPassword ] = useState('')
     const [ alerta, setAlerta ] = useState({})
+
+    const telegram = "telegram"
 
     const handleSubmit = async e => {
         e.preventDefault();
