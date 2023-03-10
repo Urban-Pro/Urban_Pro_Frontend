@@ -114,7 +114,7 @@ const Proyecto = () => {
                     <Link
                       to={`/proyectos/nuevo-colaborador/${proyecto._id}`}
                       className='text-gray-400 w-1/2 p-2 hover:text-black uppercase font-bold'
-                    >Añadir</Link>
+                    >Añadir +</Link>
                 </div>
 
                 <div className='justify-center flex'>
