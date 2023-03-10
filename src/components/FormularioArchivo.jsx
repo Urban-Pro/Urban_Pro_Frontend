@@ -12,8 +12,7 @@ const FormularioArchivo = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("archivo", archivo);
-    formData.append("nombre", telegram);
-    console.log(formData)
+    formData.append("telegram", telegram);
 
     try {
       await clienteAxios.post("/upload/file", formData, {
