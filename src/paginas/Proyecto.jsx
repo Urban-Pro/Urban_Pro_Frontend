@@ -91,18 +91,20 @@ const Proyecto = () => {
           )}
 
 
-            <p className='font-bold text-xl mt-10'>Tareas del Proyecto</p>
+            <p className='font-bold text-xl mt-10 ml-10'>Tareas del Proyecto</p>
 
 
-            <div className='bg-white shadow mt-10 rounded-lg'>
-                {proyecto.tareas?.length ? 
-                  proyecto.tareas?.map( tarea => (
-                    <Tarea 
-                      key={tarea._id}
-                      tarea={tarea}
-                    />
-                  )) : 
-                <p className='text-center my-5 p-10'>No hay tareas en este proyecto</p>}
+            <div className=' justify-center flex '>
+              <div className='bg-white shadow mt-10 rounded-lg justify-center w-fit'>
+                  {proyecto.tareas?.length ? 
+                    proyecto.tareas?.map( tarea => (
+                      <Tarea 
+                        key={tarea._id}
+                        tarea={tarea}
+                      />
+                    )) : 
+                  <p className='text-center my-5 p-10'>No hay tareas en este proyecto</p>}
+              </div>
             </div>
             
             {admin && (

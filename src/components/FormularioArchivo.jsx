@@ -34,8 +34,8 @@ const FormularioArchivo = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>{percentCounter}</div>
-      <div className="mb-3">
+      <div className="flex flex-col">{percentCounter}</div>
+      <div className="mb-3 flex flex-col">
         <label htmlFor="archivo" className="form-label">
           Seleccione un archivo:
         </label>
