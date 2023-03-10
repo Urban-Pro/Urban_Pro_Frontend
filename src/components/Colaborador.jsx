@@ -6,7 +6,7 @@ const Colaborador = ({colaborador}) => {
     const {  nombre, email } = colaborador
 
     return (
-        <div className="border-b p-5 flex justify-between items-center">
+        <div className="border-b p-5 flex flex-col justify-center items-center">
             <div>
                 <p>{nombre}</p>
                 <p className="text-sm text-gray-700">{email}</p>
