@@ -18,10 +18,10 @@ const Modelos = () => {
 
         <div className="bg-white shadow mt-10 rounded-lg ">
             {modelos.length ? 
-              modelos.map(proyecto => (
+              modelos.map(modelo => (
                   <PreviewModelos 
-                      key={proyecto._id}
-                      proyecto={proyecto}
+                      key={modelo._id}
+                      modelo={modelo}
                   />
               ))
             : <p className=" text-center text-gray-600 uppercase  p-5">No hay nada aún</p>}
