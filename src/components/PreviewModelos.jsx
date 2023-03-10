@@ -3,7 +3,9 @@ import useAuth from '../hooks/useAuth'
 
 const PreviewModelos = ({modelo}) => {
 
-    const {nombre, telegram, email} = modelo
+    const { auth } = useAuth()
+
+    const { nombre, _id, telegram, email} = modelo
 
 
 
@@ -22,6 +24,11 @@ const PreviewModelos = ({modelo}) => {
                     </span>
                 </p>
             </div>
+
+            <Link
+                to={`${_id}`}
+                className='text-gray-600 hover:text-gray-800 uppercase text-sm font-bold'
+            >Ver Modelo</Link>
         </div>
     )
 }
