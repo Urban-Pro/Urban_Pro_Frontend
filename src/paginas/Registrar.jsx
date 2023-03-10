@@ -5,6 +5,7 @@ import clienteAxios from '../config/clienteAxios'
 
 const Registrar = () => {
     const [ nombre, setNombre ] = useState('')
+    const [ telegram, setTelegram ] = useState('telegram')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ repetirPassword, setRepetirPassword ] = useState('')
@@ -41,7 +42,7 @@ const Registrar = () => {
 
         // Crear el usuario en la API
         try {
-            const { data } = await clienteAxios.post(`/usuarios`, {nombre, email, password} )
+            const { data } = await clienteAxios.post(`/usuarios`, {nombre, email, password, telegram} )
 
             setAlerta({
                 msg: data.msg,
