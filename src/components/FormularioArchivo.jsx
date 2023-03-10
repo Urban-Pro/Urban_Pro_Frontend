@@ -11,7 +11,7 @@ const FormularioArchivo = () => {
     formData.append("archivo", archivo);
 
     try {
-      await clienteAxios.post("/upload", formData, {
+      await clienteAxios.post("/upload/", formData, {
         onUploadProgress: (progressEvent) => {
           const percent = (progressEvent.loaded / progressEvent.total) * 100;
           setpercentCounter(`Progress: ${Math.round(percent)}%`)
