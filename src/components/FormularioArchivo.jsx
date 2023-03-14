@@ -50,9 +50,10 @@ const FormularioArchivo = () => {
       const range = document.createRange();
       range.selectNodeContents(preElement);
 
-      const errorText = range.toString().trim();
-      const errorMessage = errorText.split(":")[2].replace("at fileFilter (file", "")
-      setError(errorMessage);
+      const errorText = range.toString()
+      const errorMessage = errorText.split(":")[2]
+      const eM = errorMessage.replace("at fileFilter (file", "").trim()
+      setError(eM);
       setPercentCounter(null);
       setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
       setTimeout(() => {
