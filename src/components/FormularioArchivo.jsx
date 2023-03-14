@@ -52,7 +52,6 @@ const FormularioArchivo = () => {
 
       const errorText = range.toString()
       const eM = errorText.split("at")[0]
-      console.log(eM)
       setError(eM);
       setPercentCounter(null);
       setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
