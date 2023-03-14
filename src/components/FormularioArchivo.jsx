@@ -52,8 +52,7 @@ const FormularioArchivo = () => {
 
       const errorText = range.toString()
       const errorMessage = errorText.split(":")[2]
-      const eM = errorMessage.replace("at fileFilter (file", "").trim()
-      setError(eM);
+      setError(errorMessage);
       setPercentCounter(null);
       setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
       setTimeout(() => {
