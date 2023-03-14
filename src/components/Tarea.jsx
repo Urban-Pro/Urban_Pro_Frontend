@@ -42,15 +42,16 @@ const Tarea = ({tarea}) => {
       
 
     return (
-        <div className="border-b p-5 sm:flex justify-start items-center">
-            <div className='w-fit lg:w-[600px] p-3'>
-                <div className="flex justify-center flex-col">
+        <div className="border-b p-5 sm:flex">
+            <div className='m-1'>
+                <div className="flex border border-black rounded-lg p-1 w-[344,11px] h-[297px] justify-center">
+                    <div className=' flex flex-col items-center md:items-start '>
+                        
                     <p className="mb-1 text-xl">{nombre}</p>
                     <p className="mb-1 text-sm text-gray-500 uppercase overflow-y-auto lg:w-fit w-[280px]">{descripcion}</p>
                     <p className="mb-1 text-sm">{ formatearFecha(fechaEntrega) }</p>
                     <p className="mb-1 text-gray-600">Prioridad: {prioridad}</p>
-                    <p className="mb-1 text-gray-600">{diasRestantes}</p>       
-                    { estado && <p className="text-xs w-fit bg-green-600 uppercase p-1 rounded-lg text-white">Aceptada por: {tarea.completado.nombre}</p>}
+                    </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -70,20 +71,29 @@ const Tarea = ({tarea}) => {
                     )}
                 </div>
             </div>
-            <div className='container w-fit m-2 border border-black p-2 rounded-lg'>
-                <div className='flex justify-center flex-col'>
-                    <FormularioArchivo/>
-                    <div className='flex flex-col'>
-                        
-                        <p className='justify-center flex'>Aceptas el Video?</p>
-                        <button
-                        className={`${estado ? 'bg-pink-200' : 'bg-gray-600'} px-4 py-3 m-5 text-white uppercase font-bold text-sm rounded-lg`}
-                        onClick={() => completarTarea(_id)}
-                        >{estado ? 'Acepto' : 'Denegada'}</button>
+            <div className='border border-black rounded-lg p-1 m-1'>       
+                <div className='flex flex-col'>
+                    
+                    <p className='justify-center flex'>¿Aceptas el pedido?</p>
+                    <button
+                    className={`${estado ? 'bg-pink-200' : 'bg-gray-600'} px-4 py-3 m-5 text-white uppercase font-bold text-sm rounded-lg`}
+                    onClick={() => completarTarea(_id)}
+                    >{estado ? 'Acepto' : 'Denegada'}</button>
 
-                    </div>
                 </div>
-            </div>            
+                {
+                estado ?                
+                    <div className='container flex flex-col items-center w-fit m-2 border-t border-black p-2'>
+                    { estado && <p className="text-xs w-fit bg-green-600 uppercase p-2 rounded-lg text-white">
+                        Aceptada por: {tarea.completado.nombre}, {diasRestantes}</p>}
+                        <div className='flex justify-center m-1 flex-col'>
+                            <FormularioArchivo/>
+                        </div>
+                    </div>
+                    :
+                    null
+                }
+            </div>           
         </div>
     )
 }

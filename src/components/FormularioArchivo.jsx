@@ -3,53 +3,102 @@ import clienteAxios from '../config/clienteAxios'
 import useAuth from '../hooks/useAuth'
 
 const FormularioArchivo = () => {
-  const { auth } = useAuth()
-  const { telegram } = auth
-  const [archivo, setArchivo] = useState(null);
-  const [percentCounter, setpercentCounter] = useState(0);
+  const { auth } = useAuth();
+  const { telegram, nombre, email } = auth;
+  const [archivos, setArchivos] = useState(null);
+  const [percentCounter, setPercentCounter] = useState(null);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!archivos || archivos.length === 0) {
+      setError("Por favor, seleccione al menos un archivo");
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+      return;
+    }
     const formData = new FormData();
-    formData.append("archivo", archivo);
+    for (let i = 0; i < archivos.length; i++) {
+      formData.append(`archivos`, archivos[i]);
+    }
     formData.append("telegram", telegram);
+    formData.append("nombre", nombre);
+    formData.append("email", email);
 
     try {
-      await clienteAxios.post("/upload/file", formData, {
+      await clienteAxios.post("/upload/files", formData, {
         onUploadProgress: (progressEvent) => {
           const percent = (progressEvent.loaded / progressEvent.total) * 100;
-          setpercentCounter(`Progress: ${Math.round(percent)}%`)
+          setPercentCounter(`Progreso: ${Math.round(percent)}%`);
         },
       });
-      alert("Archivo cargado correctamente");
+      setPercentCounter(null);
+      setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
+      setSuccess("Archivos cargados correctamente");
+      setTimeout(() => {
+        setSuccess(null);
+      }, 3000);
+      setError(null);
     } catch (error) {
-      console.log("Error uploading file", error);
-      alert("Error al cargar el archivo");
+      const htmlCode = error.response.data
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlCode, "text/html");
+      const preElement = doc.querySelector("pre");
+
+      const range = document.createRange();
+      range.selectNodeContents(preElement);
+
+      const errorText = range.toString().trim();
+      const errorMessage = errorText.split(":")[2].replace("at fileFilter (file", "").trim()
+      setError(errorMessage);
+      setPercentCounter(null);
+      setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+      setSuccess(null);
     }
   };
 
   const handleFileChange = (e) => {
-    setArchivo(e.target.files[0]);
+    setArchivos(e.target.files);
+    setError(null);
+    setSuccess(null);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-col">{percentCounter}</div>
-      <div className="mb-3 flex flex-col">
-        <label htmlFor="archivo" className="form-label">
-          Seleccione un archivo:
-        </label>
-        <input
-          type="file"
-          className="form-control"
-          id="archivo"
-          onChange={handleFileChange}
-        />
+      {archivos && (
+        <div className="flex flex-col mb-3">
+          {percentCounter == null ? null : percentCounter}
+        </div>
+      )}
+      <div className="mb-3 flex flex-row w-min items-center">
+        <div className="flex flex-col">          
+          <label htmlFor="archivos" className="form-label font-normal text-mdx">
+            Seleccione uno o varios archivos:
+          </label>
+          <input
+            type="file"
+            className=" w-[200px] p-2 "
+            id="archivos"
+            multiple
+            onChange={handleFileChange}
+          />
+        </div>
+        <div>          
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Cargar archivos
+          </button>
+        </div>
       </div>
-      <button type="submit" className="btn btn-primary">
-        Cargar archivo
-      </button>
-    </form>
+      <div className="flex items-center font-semibold">        
+        {error && <div className="text-red-500 mb-3">{error}</div>}
+        {success && <div className="text-green-500 mb-3">{success}</div>}
+      </div>
+</form>
   );
 };
 
