@@ -44,7 +44,7 @@ const Tarea = ({tarea}) => {
     return (
         <div className="border-b p-5 sm:flex">
             <div className='m-1'>
-                <div className="flex border border-black rounded-lg p-1 w-[344,11px] h-[297px] justify-center">
+                <div className={`flex border border-black rounded-lg p-1 w-[344,11px] ${estado ? 'h-[297px]' : 'h-fit'}`} justify-center>
                     <div className=' flex flex-col items-center md:items-start '>
                         
                     <p className="mb-1 text-xl">{nombre}</p>
