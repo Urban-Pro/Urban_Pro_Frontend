@@ -16,7 +16,11 @@ const ModalFormularioTarea = () => {
 
     const params = useParams()
 
-    const { modalFormularioTarea, handleModalTarea, mostrarAlerta, alerta, submitTarea, tarea } = useProyectos();
+    const { modalFormularioTarea, handleModalTarea, mostrarAlerta, alerta, submitTarea, tarea, proyecto } = useProyectos();
+    const colaboradores = proyecto?.colaboradores || [];
+    const andyObjects = colaboradores.map((colaboradores) => {
+        colaboradores.email
+    });
 
     useEffect(() => {
         if(tarea?._id) {
@@ -47,7 +51,7 @@ const ModalFormularioTarea = () => {
             return
         }
 
-        await submitTarea({ id, nombre, descripcion, fechaEntrega, prioridad, proyecto: params.id})
+        await submitTarea({ id, nombre, descripcion, fechaEntrega, prioridad, proyecto: params.id, colaboradores})
 
         setId('')
         setNombre('')
@@ -151,6 +155,16 @@ const ModalFormularioTarea = () => {
                                                 value={descripcion}
                                                 onChange={e => setDescripcion(e.target.value)}
                                             />
+                                            <div className='p-1 border-pink-200 border rounded-md'>
+                                                <h1 className='font-semibold'>Modelos que se notificaran:</h1>                                                
+                                                <ul>
+                                                    {colaboradores.map((colaborador) => (
+                                                        <li key={colaborador.id}>
+                                                            {colaborador.email}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
                                         </div>
 
                                         <div className='mb-5'>

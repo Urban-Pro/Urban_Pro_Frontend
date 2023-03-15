@@ -8,6 +8,7 @@ const NuevoColaborador = () => {
 
   const { obtenerProyecto, proyecto, cargando, colaborador, agregarColaborador, alerta } = useProyectos()
   const params = useParams()
+  console.log(proyecto)
 
   useEffect(() => {
     obtenerProyecto(params.id)
