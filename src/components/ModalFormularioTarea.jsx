@@ -159,7 +159,7 @@ const ModalFormularioTarea = () => {
                                                 <h1 className='font-semibold'>Modelos que se notificaran:</h1>                                                
                                                 <ul>
                                                     {colaboradores.map((colaborador) => (
-                                                        <li key={colaborador.id}>
+                                                        <li key={colaborador._id}>
                                                             {colaborador.email}
                                                         </li>
                                                     ))}

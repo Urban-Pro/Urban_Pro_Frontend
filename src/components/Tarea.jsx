@@ -42,9 +42,9 @@ const Tarea = ({tarea}) => {
       
 
     return (
-        <div className="border-b p-5 sm:flex">
+        <div className="border-b p-5 sm:flex items-center">
             <div className='m-1'>
-                <div className={`flex border border-black rounded-lg p-1 w-[344,11px] ${estado ? 'h-[297px]' : 'h-fit'}`} justify-center>
+                <div className={`flex border border-black rounded-lg p-1 w-[344,11px] justify-center ${estado ? 'h-[297px]' : 'h-fit'}`}>
                     <div className=' flex flex-col items-center md:items-start '>
                         
                     <p className="mb-1 text-xl">{nombre}</p>
@@ -74,7 +74,7 @@ const Tarea = ({tarea}) => {
             <div className='border border-black rounded-lg p-1 m-1'>       
                 <div className='flex flex-col'>
                     
-                    <p className='justify-center flex'>¿Aceptas el pedido?</p>
+                    <p className='flex justify-center'>¿Aceptas el pedido?</p>
                     <button
                     className={`${estado ? 'bg-pink-200' : 'bg-gray-600'} px-4 py-3 m-5 text-white uppercase font-bold text-sm rounded-lg`}
                     onClick={() => completarTarea(_id)}
