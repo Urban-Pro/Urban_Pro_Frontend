@@ -17,9 +17,10 @@ const Tarea = ({tarea}) => {
     const [timer, setTimer] = useState(null);
     const [diasRestantes, setDiasRestantes] = useState('');
 
-    const taskEstadoAlert = async id => {
+    const taskEstadoAlert = async (id, body, estado, descripcion) => {
+        console.log(descripcion)
         if (estado == false) {
-            completarTarea(id)            
+            completarTarea(id, body, estado, descripcion)            
         } else {               
             const inputText = prompt(`Segur@ que quieres cancelar?, Por favor ingresa tu Correo  para Cancelar:`);
             if (inputText == email) {
@@ -30,7 +31,7 @@ const Tarea = ({tarea}) => {
                 window.alert("Ese no es tu correo!");
                 return;
             }
-            completarTarea(id)
+            completarTarea(id, body, estado, descripcion)
         }
         }
 
@@ -110,7 +111,7 @@ const Tarea = ({tarea}) => {
                     <p className='flex justify-center text-stone-400'>{!estado ? "¿Aceptas el pedido?" : "Quiero desistir"}</p>
                     <button
                     className={`${estado ? 'bg-gray-300' : 'bg-pink-200'} px-4 py-3 m-5 text-white uppercase w-fit font-bold text-sm rounded-lg`}
-                    onClick={() => taskEstadoAlert(_id)}
+                    onClick={() => taskEstadoAlert(_id, email, estado, descripcion)}
                     >{estado ? 'Desistir' : 'Aceptar'}</button>
 
                 </div>

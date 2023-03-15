@@ -59,13 +59,13 @@ const FormularioProyecto = () => {
                         <label
                             className="text-gray-700 uppercase font-bold text-sm"
                             htmlFor="nombre"
-                        >Nombre Modelo</label>
+                        >Nombre de la Modelo [Proyecto]</label>
 
                         <input
                             id="nombre"
                             type="text"
                             className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                            placeholder="Nombre del Modelo"
+                            placeholder="Nombre del Modelo/proyecto"
                             value={nombre}
                             onChange={e => setNombre(e.target.value)}
                         />
@@ -80,7 +80,7 @@ const FormularioProyecto = () => {
                         <textarea
                             id="descripcion"
                             className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                            placeholder="Descripción de la Modelo"
+                            placeholder="Descripción de lo que se quiere conseguir con la modelo en este proyecto"
                             value={descripcion}
                             onChange={e => setDescripcion(e.target.value)}
                         />
@@ -90,7 +90,7 @@ const FormularioProyecto = () => {
                         <label
                             className="text-gray-700 uppercase font-bold text-sm"
                             htmlFor="fecha-entrega"
-                        >Fecha Entrega</label>
+                        >Periodo de prueba [Fecha Final]</label>
 
                         <input
                             id="fecha-entrega"
@@ -105,13 +105,13 @@ const FormularioProyecto = () => {
                         <label
                             className="text-gray-700 uppercase font-bold text-sm"
                             htmlFor="cliente"
-                        >Nombre la tarea</label>
+                        >Mensaje Persistente para la modelo</label>
 
                         <input
                             id="cliente"
                             type="text"
                             className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                            placeholder="Nombre de la tarea"
+                            placeholder="Comparte ideas con la modelo, de manera persistente."
                             value={cliente}
                             onChange={e => setCliente(e.target.value)}
                         />
@@ -119,7 +119,7 @@ const FormularioProyecto = () => {
 
                     <input
                         type="submit"
-                        value={id ? 'Actualizar Tarea': 'Crear Tarea'}
+                        value={id ? 'Actualizar Tarea': 'Crear Modelo/proyecto'}
                         className='bg-pink-200 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors'
                     />
             </form>

@@ -394,7 +394,7 @@ const ProyectosProvider = ({children}) => {
         }
     }
 
-    const completarTarea = async id => {
+    const completarTarea = async (id, body, estado, descripcion) => {
         try {
             const token = localStorage.getItem('token')
             if(!token) return
@@ -405,7 +405,7 @@ const ProyectosProvider = ({children}) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = await clienteAxios.post(`/tareas/estado/${id}`, {}, config)
+            const { data } = await clienteAxios.post(`/tareas/estado/${id}`, {email:body, estado:estado, descripcion:descripcion}, config)
             setTarea({})
             setAlerta({})
 
