@@ -48,7 +48,7 @@ const Tarea = ({tarea}) => {
                     <div className=' flex flex-col items-center md:items-start '>
                         
                     <p className="mb-1 text-xl">{nombre}</p>
-                    <p className="mb-1 text-sm text-gray-500 uppercase overflow-y-auto lg:w-fit w-[280px]">{descripcion}</p>
+                    <p className="mb-1 text-sm text-gray-500 uppercase w-fit ">{descripcion}</p>
                     <p className="mb-1 text-sm">{ formatearFecha(fechaEntrega) }</p>
                     <p className="mb-1 text-gray-600">Prioridad: {prioridad}</p>
                     </div>
