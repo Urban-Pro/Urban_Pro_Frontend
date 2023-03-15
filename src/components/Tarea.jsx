@@ -76,9 +76,9 @@ const Tarea = ({tarea}) => {
                     
                     <p className='flex justify-center'>¿Aceptas el pedido?</p>
                     <button
-                    className={`${estado ? 'bg-pink-200' : 'bg-gray-600'} px-4 py-3 m-5 text-white uppercase font-bold text-sm rounded-lg`}
+                    className={`${estado ? 'bg-gray-600' : 'bg-pink-200'} px-4 py-3 m-5 text-white uppercase font-bold text-sm rounded-lg`}
                     onClick={() => completarTarea(_id)}
-                    >{estado ? 'Acepto' : 'Denegada'}</button>
+                    >{estado ? 'Denegar' : 'Aceptar'}</button>
 
                 </div>
                 {
