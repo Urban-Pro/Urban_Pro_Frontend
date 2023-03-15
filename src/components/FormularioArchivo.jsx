@@ -11,7 +11,12 @@ const FormularioArchivo = () => {
   const [success, setSuccess] = useState(null);
 
   const handleSubmit = async (e) => {
+    const termsAgreed = window.confirm(`¿Acepta los términos y condiciones de Urban Pro?`);
+    if (!termsAgreed) {
+      return;
+    }
     e.preventDefault();
+
     if (!archivos || archivos.length === 0) {
       setError("Por favor, seleccione al menos un archivo");
       setTimeout(() => {
