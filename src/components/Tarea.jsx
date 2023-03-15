@@ -3,16 +3,36 @@ import { formatearFecha } from "../helpers/formatearFecha"
 import useProyectos from "../hooks/useProyectos"
 import useAdmin from "../hooks/useAdmin"
 import FormularioArchivo from '../components/FormularioArchivo';
+import useAuth from '../hooks/useAuth'
 
 const Tarea = ({tarea}) => {
 
     const { handleModalEditarTarea, handleModalEliminarTarea, completarTarea } = useProyectos()
+    const { auth } = useAuth();
+    const { email } = auth;
     const admin = useAdmin()
 
     const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea
     
     const [timer, setTimer] = useState(null);
     const [diasRestantes, setDiasRestantes] = useState('');
+
+    const taskEstadoAlert = async id => {
+        if (estado == false) {
+            completarTarea(id)            
+        } else {               
+            const inputText = prompt(`Segur@ que quieres cancelar?, Por favor ingresa tu Correo  para Cancelar:`);
+            if (inputText == email) {
+                // El usuario presionó "Aceptar" y proporcionó una respuesta
+                window.alert(`Desististe de la tarea con el correo ${inputText}, se notificara a tu administrador.`);
+            } else {
+                // El usuario presionó "Cancelar"
+                window.alert("Ese no es tu correo!");
+                return;
+            }
+            completarTarea(id)
+        }
+        }
 
     useEffect(() => {
         const fechaLimite = new Date(fechaEntrega).getTime();
@@ -44,7 +64,7 @@ const Tarea = ({tarea}) => {
     return (
         <div className="border-b p-5 sm:flex items-center">
             <div className='m-1'>
-                <div className={`flex border border-black rounded-lg p-1 w-[344,11px] justify-center ${estado ? 'h-[312px]' : 'h-fit'}`}>
+                <div className={`flex border border-black rounded-lg p-1 w-[344,11px] justify-center ${estado ? 'h-[288px]' : 'h-fit'}`}>
                     <div className=' flex flex-col items-center md:items-start '>
                         
                     <p className="mb-1 text-xl">{nombre}</p>
@@ -71,19 +91,10 @@ const Tarea = ({tarea}) => {
                     )}
                 </div>
             </div>
-            <div className='border border-black rounded-lg p-1 m-1'>       
-                <div className='flex flex-col'>
-                    
-                    <p className='flex justify-center'>¿Aceptas el pedido?</p>
-                    <button
-                    className={`${estado ? 'bg-gray-600' : 'bg-pink-200'} px-4 py-3 m-5 text-white uppercase font-bold text-sm rounded-lg`}
-                    onClick={() => completarTarea(_id)}
-                    >{estado ? 'Denegar' : 'Aceptar'}</button>
-
-                </div>
+            <div className='border border-black rounded-lg p-1 m-1 items-center flex flex-col'> 
                 {
                 estado ?                
-                    <div className='container flex flex-col items-center w-fit m-2 border-t border-black p-2'>
+                    <div className='container flex flex-col items-center w-fit m-2 border-b border-black p-2'>
                     { estado && <p className="text-xs w-fit bg-green-600 uppercase p-2 rounded-lg text-white">
                         Aceptada por: {tarea.completado.nombre}, {diasRestantes}</p>}
                         <div className='flex justify-center m-1 flex-col'>
@@ -93,6 +104,16 @@ const Tarea = ({tarea}) => {
                     :
                     null
                 }
+                      
+                <div className='flex flex-row items-center justify-center border border-red-100 w-fit h-fit rounded-md p-1 px-10'>
+                    
+                    <p className='flex justify-center text-stone-400'>{!estado ? "¿Aceptas el pedido?" : "Quiero desistir"}</p>
+                    <button
+                    className={`${estado ? 'bg-gray-300' : 'bg-pink-200'} px-4 py-3 m-5 text-white uppercase w-fit font-bold text-sm rounded-lg`}
+                    onClick={() => taskEstadoAlert(_id)}
+                    >{estado ? 'Desistir' : 'Aceptar'}</button>
+
+                </div>
             </div>           
         </div>
     )
