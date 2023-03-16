@@ -41,7 +41,7 @@ const Header = () => {
                 <Link
                     to="/proyectos"
                     className='font-bold uppercase'
-                >Modelos</Link>
+                >Proyectos</Link>
                 :
                 <Link
                     to="/proyectos"
