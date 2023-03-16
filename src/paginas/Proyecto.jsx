@@ -109,25 +109,29 @@ const Proyecto = () => {
             
             {admin && (
               <>
-                <div className='flex items-center justify-center mt-10'>
-                    <p className='font-bold text-xl w-2/1 p-2'>Colaboradores</p>
-                    <Link
-                      to={`/proyectos/nuevo-colaborador/${proyecto._id}`}
-                      className='text-gray-400 w-1/2 p-2 hover:text-black uppercase font-bold'
-                    >Añadir +</Link>
-                </div>
-
-                <div className='justify-center flex'>
-                  <div className='bg-white shadow mt-10 rounded-lg flex flex-col justify-center w-fit'>
-                      {proyecto.colaboradores?.length ? 
-                        proyecto.colaboradores?.map( colaborador => (
-                            <Colaborador 
-                                key={colaborador._id}
-                                colaborador={colaborador}
-                            />
-                        )) : 
-                      <p className='text-center my-5 p-10'>No hay Colaboradores en este proyecto</p>}
+                <div className='flex justify-between'>
+                  
+                  <div className='flex-1'>
+                      <p className='font-bold text-xl w-2/1'>Colaboradores</p>
+                      <Link
+                        to={`/proyectos/nuevo-colaborador/${proyecto._id}`}
+                        className='text-gray-400 w-1/2 hover:text-black uppercase font-bold'
+                      >Añadir </Link>
                   </div>
+
+                  <div className='justify-center flex'>
+                    <div className='bg-white shadow mt-10 rounded-lg flex flex-col justify-center w-fit'>
+                        {proyecto.colaboradores?.length ? 
+                          proyecto.colaboradores?.map( colaborador => (
+                              <Colaborador 
+                                  key={colaborador._id}
+                                  colaborador={colaborador}
+                              />
+                          )) : 
+                        <p className='text-center my-5 p-10'>No hay Colaboradores en este proyecto</p>}
+                    </div>
+                  </div>
+
                 </div>
               </>
             )}

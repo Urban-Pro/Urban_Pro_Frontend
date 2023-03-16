@@ -64,31 +64,31 @@ const Tarea = ({tarea}) => {
     return (
         <div className="border-b p-5 sm:flex items-center">
             <div className='m-1'>
-                <div className={`flex border border-black rounded-lg p-1 w-[344,11px] justify-center ${estado ? 'h-[288px]' : 'h-fit'}`}>
+                <div className={`flex border border-black rounded-lg p-1 w-[344,11px] justify-center ${estado ? 'h-[283px]' : 'h-fit'}`}>
                     <div className=' flex flex-col items-center md:items-start '>
                         
-                    <p className="mb-1 text-xl">{nombre}</p>
-                    <p className="mb-1 text-sm text-gray-500 uppercase w-fit ">{descripcion}</p>
-                    <p className="mb-1 text-sm">{ formatearFecha(fechaEntrega) }</p>
-                    <p className="mb-1 text-gray-600">Prioridad: {prioridad}</p>
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                    {admin && (
-                        <button
-                            className="bg-indigo-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                            onClick={() => handleModalEditarTarea(tarea)}
-                        >Editar</button>
-
-                    )}
+                    <p className="mb-1 px-2 text-xl">{nombre}</p>
+                    <p className="mb-1 px-2 text-sm text-gray-500 uppercase w-fit ">{descripcion}</p>
+                    <p className="mb-1 px-2 text-sm">{ formatearFecha(fechaEntrega) }</p>
+                    <p className="mb-1 px-2 text-gray-600">Prioridad: {prioridad}</p>
                     
-                    {admin && ( 
-                        <button
-                            className="bg-red-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                            onClick={() => handleModalEliminarTarea(tarea)}
-                        >Eliminar</button>
-                    )}
+                    <div className="flex flex-row m-1">
+                        {admin && (
+                            <button
+                                className="bg-indigo-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                onClick={() => handleModalEditarTarea(tarea)}
+                            >Editar</button>
+
+                        )}
+                        
+                        {admin && ( 
+                            <button
+                                className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                onClick={() => handleModalEliminarTarea(tarea)}
+                            >Eliminar</button>
+                        )}
+                    </div>
+                    </div>
                 </div>
             </div>
             <div className='border border-black rounded-lg p-1 m-1 items-center flex flex-col'> 
