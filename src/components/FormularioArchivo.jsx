@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clienteAxios from '../config/clienteAxios'
 import useAuth from '../hooks/useAuth'
 
 const FormularioArchivo = () => {
   const { auth } = useAuth();
   const { telegram, nombre, email } = auth;
+  console.log(telegram)
   const [archivos, setArchivos] = useState(null);
   const [percentCounter, setPercentCounter] = useState(null);
   const [error, setError] = useState(null);

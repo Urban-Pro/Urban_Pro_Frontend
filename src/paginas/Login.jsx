@@ -32,6 +32,7 @@ const Login = () => {
             localStorage.setItem('token', data.token)
             setAuth(data)
             navigate('/proyectos')
+            window.location.reload();
         } catch (error) {
             setAlerta({
                 msg: error.response.data.msg,

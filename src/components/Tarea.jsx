@@ -28,7 +28,7 @@ const Tarea = ({tarea}) => {
                 window.alert(`Desististe de la tarea con el correo ${inputText}, se notificara a tu administrador.`);
             } else {
                 // El usuario presionó "Cancelar"
-                window.alert("Ese no es tu correo!");
+                window.alert("Cancelaste!");
                 return;
             }
             completarTarea(id, body, estado, descripcion)
