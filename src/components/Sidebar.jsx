@@ -16,7 +16,7 @@ const Sidebar = () => {
         to="crear-proyecto"
         className='bg-pink-200 w-full p-3 text-white uppercase font-bold block mt-5 text-center rounded-lg'
       >
-        Nueva Modelo
+        Nuevo Proyecto
       </Link>
       <Link
         to="editar-modelos"

@@ -59,7 +59,7 @@ const FormularioProyecto = () => {
                         <label
                             className="text-gray-700 uppercase font-bold text-sm"
                             htmlFor="nombre"
-                        >Nombre de la Modelo [Proyecto]</label>
+                        >Nombre del Proyecto</label>
 
                         <input
                             id="nombre"
