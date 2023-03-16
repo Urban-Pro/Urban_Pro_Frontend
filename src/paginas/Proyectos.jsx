@@ -13,7 +13,7 @@ const Proyectos = () => {
   return (
     <>
         {email == 'urbanproapp@outlook.com' || email == 'santiagomuzik@gmail.com' ?
-        <h1 className="text-4xl font-black">Modelos</h1> : <h1 className="text-4xl font-black">Proyectos en Curso</h1>}
+        <h1 className="text-4xl font-black">Proyectos</h1> : <h1 className="text-4xl font-black">Proyectos en Curso</h1>}
         {msg && <Alerta alerta={alerta} />}
 
         <div className="bg-white shadow mt-10 rounded-lg ">
