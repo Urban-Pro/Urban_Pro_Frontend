@@ -18,7 +18,6 @@ const Tarea = ({tarea}) => {
     const [diasRestantes, setDiasRestantes] = useState('');
 
     const taskEstadoAlert = async (id, body, estado, descripcion) => {
-        console.log(descripcion)
         if (estado == false) {
             completarTarea(id, body, estado, descripcion)            
         } else {               
