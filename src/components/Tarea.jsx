@@ -70,7 +70,7 @@ const Tarea = ({tarea}) => {
                     <p className="mb-1 px-2 text-xl">{nombre}</p>
                     <p className="mb-1 px-2 text-sm">{ formatearFecha(fechaEntrega) }</p>
                     <p className="mb-3 px-2 text-gray-600">Prioridad: {prioridad}</p>
-                    <p className="mb-1 px-2 text-sm text-gray-500 uppercase max-h-[200px] overflow-y-auto border border-pink-100">{descripcion}</p>
+                    <p className="mb-1 px-2 text-sm text-gray-500 uppercase max-h-[283px] md:h-[283px] overflow-y-auto border border-pink-100">{descripcion}</p>
                     
                     <div className="flex flex-row m-1">
                         {admin && (
