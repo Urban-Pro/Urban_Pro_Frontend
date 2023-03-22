@@ -41,10 +41,8 @@ const ModelosProvider = ({children}) => {
     }, [auth])
 
     const editarModelo = async modelo => {
-        console.log(modelo)
         try {
             const token = localStorage.getItem('token')
-            console.log(token)
             if(!token) return
 
             const config = {
@@ -55,7 +53,6 @@ const ModelosProvider = ({children}) => {
             }
 
             const { data } = await clienteAxios.put(`/modelos/${modelo.id}`, modelo, config)
-            console.log(data)
 
             // Sincronizar el state
             const modelosActualizados = modelos.map(modeloState => modeloState._id === data._id ? data : modeloState)
@@ -101,7 +98,6 @@ const ModelosProvider = ({children}) => {
     }
 
     const eliminarModelo = async (id) => {
-        console.log(id)
         try {
             const token = localStorage.getItem('token')
             if(!token) return
