@@ -56,7 +56,8 @@ const FormularioArchivo = () => {
       range.selectNodeContents(preElement);
 
       const errorText = range.toString()
-      const eM = errorText.split("at")[0]{eM == "Internal Server Error" ? "jpeg|jpg|png|gif|mp4|avi|wmv|mov|\nFormatos permitidos."}
+      const eM = errorText.split("at")[0]
+      {eM == "Internal Server Error" ? "jpeg|jpg|png|gif|mp4|avi|wmv|mov|\nFormatos permitidos.": eM}
       console.log(eM)
       setPercentCounter(null);
       setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
