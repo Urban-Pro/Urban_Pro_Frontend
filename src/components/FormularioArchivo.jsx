@@ -57,7 +57,7 @@ const FormularioArchivo = () => {
 
       const errorText = range.toString()
       const eM = errorText.split("at")[0]
-      {!eM == "Internal Server Error" ? setError("jpeg|jpg|png|gif|mp4|avi|wmv|mov|\nFormatos permitidos."): setError(eM)}
+      {eM == "Internal Server Error" ? setError("jpeg|jpg|png|gif|mp4|avi|wmv|mov|\nFormatos permitidos."): setError(eM)}
       ;
       console.log()
       setPercentCounter(null);
