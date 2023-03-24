@@ -8,12 +8,12 @@ import NotificationModal from './NotificationModal';
 
 const Tarea = ({tarea}) => {
 
-    const { handleModalEditarTarea, handleModalEliminarTarea, completarTarea, proyecto} = useProyectos()
+    const { handleModalEditarTarea, handleModalEliminarTarea, completarTarea, proyecto, turnChange} = useProyectos()
     const { auth } = useAuth();
     const { email, typeAccount } = auth;
     const admin = useAdmin()
 
-    const { descripcion, nombre, prioridad, fechaEntrega, estado, _id, emailCreador} = tarea
+    const { descripcion, nombre, prioridad, fechaEntrega, estado, _id, emailCreador, turn} = tarea
     const [timer, setTimer] = useState(null);
     const [diasRestantes, setDiasRestantes] = useState('');
     const [showModal, setShowModal] = useState(false);
@@ -34,8 +34,6 @@ const Tarea = ({tarea}) => {
             completarTarea(id, body, estado, descripcion)
         }
         }
-    
-
 
     useEffect(() => {
         const fechaLimite = new Date(fechaEntrega).getTime();
@@ -61,7 +59,13 @@ const Tarea = ({tarea}) => {
         };
       }, [fechaEntrega]);
 
-    const adminNotification = () => {
+    const adminNotification = async (id, turn) => {
+        console.log(id, turn)
+        if (turn == false) {
+            turnChange(id, turn)            
+        } else {            
+            turnChange(id, turn)   
+        }
         setShowModal(true);
     }
 
@@ -97,16 +101,15 @@ const Tarea = ({tarea}) => {
                                 >Eliminar</button>
                             )}
 
-                            {typeAccount ? ( 
-                                <button
+                            {typeAccount ? 
+                                !turn && <button
                                     className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                                    onClick={() => adminNotification()}
+                                    onClick={() => adminNotification(_id, turn)}
                                 >Admin</button>
-                                )
                                 :                                
-                                <button
+                                turn && <button
                                     className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                                    onClick={() => adminNotification()}
+                                    onClick={() => adminNotification(_id, turn)}
                                 >Model</button>
                                 }
                         </div>

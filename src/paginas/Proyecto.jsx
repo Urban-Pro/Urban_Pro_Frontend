@@ -52,6 +52,12 @@ const Proyecto = () => {
         cambiarEstadoTarea(nuevoEstadoTarea)
       }
     })
+
+    socket.on('nuevo estado turn', nuevoEstadoTarea => {
+      if(nuevoEstadoTarea.proyecto._id === proyecto._id) {
+        cambiarEstadTarea(nuevoEstadoTarea)
+      }
+    })
   })
 
   const { nombre } = proyecto

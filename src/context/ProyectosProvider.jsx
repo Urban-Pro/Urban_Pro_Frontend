@@ -448,6 +448,29 @@ const ProyectosProvider = ({children}) => {
         }
         
     }
+    const turnChange = async (id, turn) => {
+        try {
+            const token = localStorage.getItem('token')
+            if(!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const { data } = await clienteAxios.post(`/tareas/estadoturn/${id}`, {id, turn}, config)
+            setTarea({})
+            // setAlerta({})
+
+            // socket
+            socket.emit('cambiar estado turn', data)
+
+        } catch (error) {
+            console.log(error.response)
+        }
+        
+    }
 
     const handleBuscador = () => {
         setBuscador(!buscador)
@@ -471,6 +494,11 @@ const ProyectosProvider = ({children}) => {
         setProyecto(proyectoActualizado)
     }
     const cambiarEstadoTarea = tarea => {
+        const proyectoActualizado = {...proyecto}
+        proyectoActualizado.tareas = proyectoActualizado.tareas.map(tareaState => tareaState._id === tarea._id ? tarea : tareaState)
+        setProyecto(proyectoActualizado)
+    }
+    const cambiarEstadTarea = tarea => {
         const proyectoActualizado = {...proyecto}
         proyectoActualizado.tareas = proyectoActualizado.tareas.map(tareaState => tareaState._id === tarea._id ? tarea : tareaState)
         setProyecto(proyectoActualizado)
@@ -511,12 +539,14 @@ const ProyectosProvider = ({children}) => {
                 modalEliminarColaborador,
                 eliminarColaborador,
                 completarTarea,
+                turnChange,
                 buscador, 
                 handleBuscador,
                 submitTareasProyecto,
                 eliminarTareaProyecto,
                 actualizarTareaProyecto,
                 cambiarEstadoTarea,
+                cambiarEstadTarea,
                 cerrarSesionProyectos
             }}
         >{children}

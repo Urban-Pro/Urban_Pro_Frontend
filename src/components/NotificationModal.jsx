@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useProyectos from '../hooks/useProyectos'
 
 const NotificationModal = ({onClose, email, typeAccount, emailCreador}) => {
+
     const { AdminModel } = useProyectos();
 
     const [to, setTo] = useState('');
