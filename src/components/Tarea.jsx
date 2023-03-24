@@ -4,18 +4,19 @@ import useProyectos from "../hooks/useProyectos"
 import useAdmin from "../hooks/useAdmin"
 import FormularioArchivo from '../components/FormularioArchivo';
 import useAuth from '../hooks/useAuth'
+import NotificationModal from './NotificationModal';
 
 const Tarea = ({tarea}) => {
 
-    const { handleModalEditarTarea, handleModalEliminarTarea, completarTarea } = useProyectos()
+    const { handleModalEditarTarea, handleModalEliminarTarea, completarTarea, proyecto} = useProyectos()
     const { auth } = useAuth();
-    const { email } = auth;
+    const { email, typeAccount } = auth;
     const admin = useAdmin()
 
-    const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea
-    
+    const { descripcion, nombre, prioridad, fechaEntrega, estado, _id, emailCreador} = tarea
     const [timer, setTimer] = useState(null);
     const [diasRestantes, setDiasRestantes] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     const taskEstadoAlert = async (id, body, estado, descripcion) => {
         if (estado == false) {
@@ -33,6 +34,8 @@ const Tarea = ({tarea}) => {
             completarTarea(id, body, estado, descripcion)
         }
         }
+    
+
 
     useEffect(() => {
         const fechaLimite = new Date(fechaEntrega).getTime();
@@ -53,13 +56,18 @@ const Tarea = ({tarea}) => {
           setTimer(`${horasRestantes}h ${minutosRestantes}m ${segundosRestantes}s`);
         }, 1000);
       
-        setTimer(intervalId);
-      
         return () => {
-          clearInterval(timer);
+          clearInterval(intervalId);
         };
       }, [fechaEntrega]);
-      
+
+    const adminNotification = () => {
+        setShowModal(true);
+    }
+
+    const handleModalClose = () => {
+        setShowModal(false);
+    }
 
     return (
         <div className="border-b p-5 sm:flex items-center">
@@ -67,27 +75,41 @@ const Tarea = ({tarea}) => {
                 <div className={`flex border border-black rounded-lg p-1 w-[344,11px] justify-center ${estado ? 'max-h-[283px] h-auto' : 'h-fit'}`}>
                     <div className=' flex flex-col items-center md:items-start '>
                         
-                    <p className="mb-1 px-2 text-xl">{nombre}</p>
-                    <p className="mb-1 px-2 text-sm">{ formatearFecha(fechaEntrega) }</p>
-                    <p className="mb-3 px-2 text-gray-600">Prioridad: {prioridad}</p>
-                    <p className="mb-1 px-2 text-sm text-gray-500 uppercase max-h-[283px] sm:h-[283px] overflow-y-auto border border-pink-100">{descripcion}</p>
-                    
-                    <div className="flex flex-row m-1">
-                        {admin && (
-                            <button
-                                className="bg-indigo-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                                onClick={() => handleModalEditarTarea(tarea)}
-                            >Editar</button>
-
-                        )}
+                        <p className="mb-1 px-2 text-xl">{nombre}</p>
+                        <p className="mb-1 px-2 text-xl">{emailCreador}</p>
+                        <p className="mb-1 px-2 text-sm">{ formatearFecha(fechaEntrega) }</p>
+                        <p className="mb-3 px-2 text-gray-600">Prioridad: {prioridad}</p>
+                        <p className="mb-1 px-2 text-sm text-gray-500 uppercase max-h-[283px] sm:h-[283px] overflow-y-auto border border-pink-100">{descripcion}</p>
                         
-                        {admin && ( 
-                            <button
-                                className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                                onClick={() => handleModalEliminarTarea(tarea)}
-                            >Eliminar</button>
-                        )}
-                    </div>
+                        <div className="flex flex-row m-1">
+                            {admin && (
+                                <button
+                                    className="bg-indigo-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                    onClick={() => handleModalEditarTarea(tarea)}
+                                >Editar</button>
+
+                            )}
+                            
+                            {admin && ( 
+                                <button
+                                    className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                    onClick={() => handleModalEliminarTarea(tarea)}
+                                >Eliminar</button>
+                            )}
+
+                            {typeAccount ? ( 
+                                <button
+                                    className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                    onClick={() => adminNotification()}
+                                >Admin</button>
+                                )
+                                :                                
+                                <button
+                                    className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                                    onClick={() => adminNotification()}
+                                >Model</button>
+                                }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,7 +136,20 @@ const Tarea = ({tarea}) => {
                     >{estado ? 'Desistir' : 'Aceptar'}</button>
 
                 </div>
-            </div>           
+            </div>
+            
+            <div>
+                {showModal && (
+                    <div className="fixed z-50 inset-0 flex items-center justify-center backdrop-filter backdrop-blur-sm bg-opacity-50">
+                        <NotificationModal onClose={handleModalClose}
+                        email={email}
+                        typeAccount={typeAccount}
+                        emailCreador={emailCreador}
+                        
+                        />
+                    </div>
+                )}
+            </div>            
         </div>
     )
 }

@@ -3,10 +3,12 @@ import { Dialog, Transition } from '@headlessui/react'
 import useProyectos from '../hooks/useProyectos'
 import Alerta from './Alerta'
 import { useParams } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 const PRIORIDAD = ['Baja', 'Media', 'Alta']
 
 const ModalFormularioTarea = () => {
+    const {auth} = useAuth()
 
     const [id, setId] = useState('')
     const [nombre, setNombre] = useState('')
@@ -23,19 +25,25 @@ const ModalFormularioTarea = () => {
     });
 
     useEffect(() => {
-        if(tarea?._id) {
+        let isMounted = true;
+
+        if(tarea?._id && isMounted) {
             setId(tarea._id)
             setNombre(tarea.nombre)
             setDescripcion(tarea.descripcion)
             setFechaEntrega(tarea.fechaEntrega?.split('T')[0])
             setPrioridad(tarea.prioridad)
-            return
-        } 
-        setId('')
-        setNombre('')
-        setDescripcion('')
-        setFechaEntrega('')
-        setPrioridad('')
+        } else if (isMounted) {
+            setId('')
+            setNombre('')
+            setDescripcion('')
+            setFechaEntrega('')
+            setPrioridad('')
+        }
+
+        return () => {
+            isMounted = false;
+        }
         
     }, [tarea]);
     
@@ -50,8 +58,8 @@ const ModalFormularioTarea = () => {
             })
             return
         }
-
-        await submitTarea({ id, nombre, descripcion, fechaEntrega, prioridad, proyecto: params.id, colaboradores})
+        
+        await submitTarea({ id, nombre, descripcion, fechaEntrega, prioridad, proyecto: params.id, colaboradores, emailCreador: auth.email})
 
         setId('')
         setNombre('')
@@ -62,7 +70,7 @@ const ModalFormularioTarea = () => {
     }
 
     const { msg } = alerta
- 
+
     return (
         <Transition.Root show={ modalFormularioTarea } as={Fragment}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={ handleModalTarea }>
@@ -114,9 +122,14 @@ const ModalFormularioTarea = () => {
 
                             <div className="sm:flex sm:items-start">
                                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                                    <Dialog.Title as="h3" className="text-lg leading-6 font-bold text-gray-900">
+                                    <Dialog.Title as="h3" className="flex justify-center mx-1 items-center text-lg leading-6 font-bold text-gray-900">
                                         {id ? 'Editar Tarea': 'Crear Tarea'}
+                                        <div className='mx-1'>
+                                            {auth.email}
+                                        </div>
                                     </Dialog.Title>
+
+                                    
 
                                     {msg && <Alerta alerta={alerta} />}
 
@@ -124,6 +137,7 @@ const ModalFormularioTarea = () => {
                                         onSubmit={handleSubmit}
                                         className='my-10'
                                     >
+
                                         <div className='mb-5'>
                                             <label
                                                 className='text-gray-700 uppercase font-bold text-sm' 

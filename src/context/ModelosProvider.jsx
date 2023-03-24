@@ -110,7 +110,6 @@ const ModelosProvider = ({children}) => {
             }
 
             const data = await clienteAxios.delete(`/modelos/${id}`, config)
-            console.log(data)
 
             // Sincronizar el state
             const modelosActualizados = modelos.filter(modeloState => modeloState._id !== id )
