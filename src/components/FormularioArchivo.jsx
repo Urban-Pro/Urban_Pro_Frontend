@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import clienteAxios from '../config/clienteAxios'
+import React, { useState } from "react";
 import useAuth from '../hooks/useAuth'
+import { uploadFile } from '../services/firebaseService'
 
 const FormularioArchivo = () => {
   const { auth } = useAuth();
@@ -9,67 +9,61 @@ const FormularioArchivo = () => {
   const [percentCounter, setPercentCounter] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [uploadedCount, setUploadedCount] = useState(0);
+  const [urls, setUrls] = useState([]);
 
   const handleSubmit = async (e) => {
-    const termsAgreed = window.confirm(`¿Acepta los términos y condiciones de Urban Pro?`);
+    const termsAgreed = window.confirm(`¿Acepta los términos y condiciones de Urban Pro?`)
     if (!termsAgreed) {
       return;
     }
     e.preventDefault();
-
     if (!archivos || archivos.length === 0) {
       setError("Por favor, seleccione al menos un archivo");
       setTimeout(() => {
-        setError(null);
-      }, 3000);
-      return;
+        setError(null)
+      }, 3000)
+      return
     }
-    const formData = new FormData();
-    for (let i = 0; i < archivos.length; i++) {
-      formData.append(`archivos`, archivos[i]);
-    }
-    formData.append("telegram", telegram);
-    formData.append("nombre", nombre);
-    formData.append("email", email);
-
     try {
-      await clienteAxios.post("/upload/files", formData, {
-        onUploadProgress: (progressEvent) => {
-          const percent = (progressEvent.loaded / progressEvent.total) * 100;
-          setPercentCounter(`Progreso: ${Math.round(percent)}%`);
-        },
-      });
+      const files = Array.from(archivos)
+      setUploadedCount(0)
+      setUrls([])
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i]
+        const snapshot = await uploadFile(file, (progress) => {
+          const percent = (progress.bytesTransferred / progress.totalBytes) * 100;
+          setPercentCounter(`Progreso: ${Math.round(percent)}%`)
+        })
+        if (snapshot && snapshot.ref && typeof snapshot.ref.getDownloadURL === 'function') {
+          const url = await snapshot.ref().getDownloadURL()
+          setUrls((prevUrls) => [...prevUrls, url])
+          setUploadedCount((prevCount) => prevCount + 1)
+        } else {
+          console.error("Error al subir el archivo:", snapshot)
+          setError("Ocurrió un error al subir el archivo")
+        }
+        const percent = 0
+        console.log(`Progreso: ${Math.round(percent)}%`)
+        if (snapshot && snapshot.ref && typeof snapshot.ref.getDownloadURL === 'function') {
+          const url = await snapshot.ref().getDownloadURL()
+          setUrls((prevUrls) => [...prevUrls, url])
+          setUploadedCount((prevCount) => prevCount + 1)
+        } else {
+          console.error("Error al subir el archivo:", snapshot)
+          setError("♥♥♥ Subiendo Exitosamente !! ♥♥♥")
+        }
+      }
       setPercentCounter(null);
-      setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
+      setArchivos(null)
       setSuccess("Archivos cargados correctamente");
       setTimeout(() => {
         setSuccess(null);
       }, 3000);
       setError(null);
     } catch (error) {
-      try {
-        const range = document.createRange();
-        range.selectNodeContents(preElement);
-      
-        const errorText = range.toString();
-        const eM = errorText.split("at")[0];
-      
-        if (eM == "Internal Server Error") {
-          setError("jpeg|jpg|png|gif|mp4|avi|wmv|mov|\nFormatos permitidos.");
-        } else {
-          setError(eM);
-        }
-      } catch (error) {
-        console.error(error);
-        setError("Error al seleccionar el contenido del elemento");
-      }
-      
-      setPercentCounter(null);
-      setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
-      setTimeout(() => {
-        setError(null);
-      }, 3000);
-      setSuccess(null);
+      console.error("Error al subir el archivo:", error);
+      setError("Ocurrió un error al subir el archivo");
     }
   };
 
@@ -95,7 +89,7 @@ const FormularioArchivo = () => {
             type="file"
             className=" w-[200px] p-2 "
             id="archivos"
-            multiple
+            multiple // Agregamos el atributo multiple
             onChange={handleFileChange}
           />
         </div>
@@ -108,8 +102,15 @@ const FormularioArchivo = () => {
       <div className="flex items-center font-semibold">        
         {error && <div className="text-red-500 mb-3">{error}</div>}
         {success && <div className="text-green-500 mb-3">{success}</div>}
+        {uploadedCount > 0 && uploadedCount === archivos.length && (
+          <div className="text-blue-500 mb-3">
+            {urls.map((url, index) => (
+              <div key={index}>{url}</div>
+            ))}
+          </div>
+        )}
       </div>
-</form>
+    </form>
   );
 };
 
