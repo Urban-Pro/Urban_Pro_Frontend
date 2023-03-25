@@ -47,21 +47,22 @@ const FormularioArchivo = () => {
       }, 3000);
       setError(null);
     } catch (error) {
-      const htmlCode = error.response.data
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlCode, "text/html");
-      const preElement = doc.querySelector("pre");
-
-      const range = document.createRange();
-      range.selectNodeContents(preElement);
-
-      const errorText = range.toString()
-      const eM = errorText.split("at")[0]
-
-      {eM == "Internal Server Error" ?
-      setError("jpeg|jpg|png|gif|mp4|avi|wmv|mov|\nFormatos permitidos.")
-      :
-      setError(eM)}
+      try {
+        const range = document.createRange();
+        range.selectNodeContents(preElement);
+      
+        const errorText = range.toString();
+        const eM = errorText.split("at")[0];
+      
+        if (eM == "Internal Server Error") {
+          setError("jpeg|jpg|png|gif|mp4|avi|wmv|mov|\nFormatos permitidos.");
+        } else {
+          setError(eM);
+        }
+      } catch (error) {
+        console.error(error);
+        setError("Error al seleccionar el contenido del elemento");
+      }
       
       setPercentCounter(null);
       setArchivos(null); // Reinicia el valor de archivos después de cargarlos correctamente
