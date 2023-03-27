@@ -12,6 +12,9 @@ const NotificationModal = ({onClose, email, typeAccount, emailCreador}) => {
 
     const handleSendNotification = async () => {
         await AdminModel({ to: emailCreador, subject, message, email, emailCreador,  typeAccount})
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000); // 1000 milisegundos = 1 segundo
     };
 
   return (
