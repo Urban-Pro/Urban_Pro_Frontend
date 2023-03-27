@@ -77,7 +77,7 @@ const Tarea = ({tarea}) => {
         e.preventDefault();
         window.open(e.target.href, '_blank');
     }
-    const descripcionHtml = descripcion.replace(/\n/g, '<br>').replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" className="italic underline bg-pink-500" onClick={handleLinkClick}>$1</a>');
+    const descripcionHtml = descripcion.replace(/\n/g, '<br>').replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" className="italic underline text-pink-300" onClick={handleLinkClick}>$1</a>');
 
     return (
         <div className="border-b p-5 sm:flex items-center">

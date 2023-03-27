@@ -27,7 +27,7 @@ const FormularioProyecto = () => {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        if([nombre, descripcion, fechaEntrega, cliente].includes('') ) {
+        if([nombre, fechaEntrega, cliente].includes('') ) {
             mostrarAlerta({
                 msg: 'Todos los Campos son Obligatorios',
                 error: true
@@ -37,7 +37,7 @@ const FormularioProyecto = () => {
         }
 
         // Pasar los datos hacia el provider
-        await submitProyecto({ id, nombre, descripcion, fechaEntrega, cliente})
+        await submitProyecto({ id, nombre, descripcion: "hidden", fechaEntrega, cliente})
 
         setId(null)
         setNombre('')
@@ -71,7 +71,7 @@ const FormularioProyecto = () => {
                         />
                     </div>
 
-                    <div className='mb-5'>
+                    <div className='mb-5 hidden '>
                         <label
                             className="text-gray-700 uppercase font-bold text-sm"
                             htmlFor="descripcion"

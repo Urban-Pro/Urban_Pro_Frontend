@@ -9,17 +9,17 @@ const FormularioColaborador = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
+  
     if(email === '') {
-        mostrarAlerta({
-          msg: 'El Email es Obligatorio',
-          error: true
-        })
-        return
+      mostrarAlerta({
+        msg: 'El Email es Obligatorio',
+        error: true
+      })
+      return
     }
-
-    submitColaborador(email)
-
+  
+    submitColaborador(email.toLowerCase())
+  
   }
 
   const { msg } = alerta
