@@ -33,7 +33,7 @@ const Tarea = ({tarea}) => {
             }
             completarTarea(id, body, estado, descripcion)
         }
-        }
+    }
 
     useEffect(() => {
         const fechaLimite = new Date(fechaEntrega).getTime();
@@ -57,7 +57,7 @@ const Tarea = ({tarea}) => {
         return () => {
           clearInterval(intervalId);
         };
-      }, [fechaEntrega]);
+    }, [fechaEntrega]);
 
     const adminNotification = async (id, turn) => {
         console.log(id, turn)
@@ -73,6 +73,8 @@ const Tarea = ({tarea}) => {
         setShowModal(false);
     }
 
+    const descripcionHtml = descripcion.replace(/\n/g, '<br>');
+
     return (
         <div className="border-b p-5 sm:flex items-center">
             <div className='m-1'>
@@ -82,7 +84,7 @@ const Tarea = ({tarea}) => {
                         <p className="mb-1 px-2 text-xl">{nombre}</p>
                         <p className="mb-1 px-2 text-sm">{ formatearFecha(fechaEntrega) }</p>
                         <p className="mb-3 px-2 text-gray-600">Prioridad: {prioridad}</p>
-                        <p className="mb-1 px-2 text-sm text-gray-500 uppercase max-h-[283px] sm:h-[283px] overflow-y-auto border border-pink-100">{descripcion}</p>
+                        <p className="mb-1 px-2 text-sm text-gray-500 uppercase max-h-[283px] sm:h-[283px] overflow-y-auto border border-pink-100" dangerouslySetInnerHTML={{ __html: descripcionHtml }}></p>
                         
                         <div className="flex flex-row m-1">
                             {admin && (
@@ -110,7 +112,7 @@ const Tarea = ({tarea}) => {
                                     className="bg-red-600 m-1 h-fit  px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
                                     onClick={() => adminNotification(_id, turn)}
                                 >Model</button>
-                                }
+                            }
                         </div>
                     </div>
                 </div>
