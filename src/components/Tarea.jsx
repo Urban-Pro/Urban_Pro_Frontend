@@ -73,7 +73,12 @@ const Tarea = ({tarea}) => {
         setShowModal(false);
     }
 
-    const descripcionHtml = descripcion.replace(/\n/g, '<br>');
+    const handleLinkClick = (e) => {
+        e.preventDefault();
+        window.open(e.target.href, '_blank');
+    }
+
+    const descripcionHtml = descripcion.replace(/\n/g, '<br>').replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" className=" text-pink-500 " onClick={handleLinkClick}>$1</a>');
 
     return (
         <div className="border-b p-5 sm:flex items-center">
