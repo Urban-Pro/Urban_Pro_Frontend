@@ -13,9 +13,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-const storageRef = ref(storage, 'archivos');
 
-const uploadFile = async (file, onProgress) => {
+const uploadFile = async (file, email, onProgress) => {
+  const storageRef = ref(storage, email);
   const fileRef = ref(storageRef, file.name);
   const uploadTask = uploadBytesResumable(fileRef, file);
   return new Promise((resolve, reject) => {

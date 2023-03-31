@@ -31,7 +31,7 @@ const FormularioArchivo = () => {
       setUrls([])
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
-        const snapshot = await uploadFile(file, (progress) => {
+        const snapshot = await uploadFile(file, email,  (progress) => {
           const percent = (progress.bytesTransferred / progress.totalBytes) * 100;
           setPercentCounter(`Progreso: ${Math.round(percent)}%`)
         })
