@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB6Xgi55mTqUi4kGIGJp8rDxKOoA4JwsJk",
@@ -29,10 +29,17 @@ const uploadFile = async (file, email, onProgress) => {
         console.error(`Error al subir archivo ${file.name}: ${error}`);
         reject(error);
       }, 
-      () => {
+      async () => {
         // Subida completada
         console.log(`Archivo ${file.name} subido correctamente`);
-        resolve(uploadTask.snapshot);
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        const fileInfo = {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          downloadURL,
+        };
+        resolve(fileInfo);
       }
     );
   });

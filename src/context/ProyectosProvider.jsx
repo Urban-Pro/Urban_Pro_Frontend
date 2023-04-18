@@ -234,6 +234,29 @@ const ProyectosProvider = ({children}) => {
         }
     }
 
+    const UploadNotification = async chail => {
+        try {
+            const token = localStorage.getItem('token')
+            if(!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const { data } = await clienteAxios.post(`/tareas/email-chat`, chail, config)
+            
+            setAlerta({})
+
+            // SOCKET
+            socket.emit('actualizar chail', data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const crearTarea = async tarea => {
         try {
             const token = localStorage.getItem('token')
@@ -514,6 +537,7 @@ const ProyectosProvider = ({children}) => {
     return (
         <ProyectosContext.Provider
             value={{
+                UploadNotification, 
                 proyectos,
                 mostrarAlerta,
                 alerta,
