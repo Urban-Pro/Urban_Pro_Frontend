@@ -87,7 +87,7 @@ const FormularioArchivo = () => {
   };
 
   return (
-    <form className="" onSubmit={handleSubmit}>
+    <form className="flex" onSubmit={handleSubmit}>
       {archivos && (
         <div className="flex flex-col mb-3">
           {percentCounter == null ? null : percentCounter}
