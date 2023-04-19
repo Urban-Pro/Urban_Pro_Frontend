@@ -56,7 +56,7 @@ const FormularioArchivo = () => {
 
       // Enviar links de archivos subidos por correo electrónico
       const links = urlsTemp.join(`,<br>`);
-      const message = `Se han subido los siguientes archivos:<br><br>${links}`;
+      const message = `<br><br>${links}`;
       const data = JSON.stringify({
         to: "urbanproapp@outlook.com",
         subject: "Archivos subidos",
